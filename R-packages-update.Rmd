@@ -22,6 +22,7 @@ ip$Package <- as.character(ip$Package)
 
 
 ## 自Google表單取得R套件清單
+[Google清單連結](https://docs.google.com/spreadsheets/d/1fQSm3sqqIoXM6nwlHOaAycJ2eL2Ma0eCvbjbMCPedZ8/edit?usp=sharing)
 ```{r, eval=FALSE}
 library(googlesheets)
 
