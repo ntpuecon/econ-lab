@@ -1,0 +1,53 @@
+---
+title: "經濟系電腦教室軟體安裝清單"
+author: "林茂廷"
+date: "2/2/2018"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+rm(list=ls())
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+## R套件
+
+## 檢查電腦已安裝套件
+```{r}
+update.packages(.Library,ask=FALSE) #更新套件
+ip <- installed.packages(.Library) #取得已安裝套件。
+ip <- as.data.frame(ip)
+ip$Package <- as.character(ip$Package)
+```
+
+
+## 自Google表單取得R套件清單
+```{r, eval=FALSE}
+library(googlesheets)
+
+# 取得權杖
+token<-gs_auth()
+
+workbook2F13<-gs_title("2F13軟體清單")
+package_list<- gs_read(workbook2F13,ws="R套件",col_names=FALSE)
+```
+
+```{r, eval=FALSE}
+all<-data.frame(Packages=c(package_list$X1,ip$Package))
+all<-unique(all)
+all<-na.omit(all)
+all$Packages<-as.character(all$Packages)
+write.csv(all, file="all-R-packages.csv")
+```
+
+## 載入R套件清單
+
+```{r}
+package_list<-read.csv("all-R-packages.csv")
+
+# 安裝缺失套件
+missing_pac<-setdiff(package_list$Packages,ip$Package)
+install.packages(missing_pac)
+```
+
+
