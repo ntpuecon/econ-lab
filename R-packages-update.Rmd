@@ -48,6 +48,13 @@ package_list<-read.csv("all-R-packages.csv")
 
 # 安裝缺失套件
 missing_pac<-setdiff(package_list$Packages,ip$Package)
+
+# ==有安裝不起來的套件時才啟用===
+# 如有安裝不起來的，請定義在exclude_pac裡：
+# exclude_pac<-c("套件1","套件2")
+# missing_pac<-setdiff(missing_pac,exclude_pac)
+# ===============================
+
 install.packages(missing_pac)
 ```
 
